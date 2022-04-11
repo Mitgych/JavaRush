@@ -21,24 +21,11 @@ public class Cinema {
         System.out.println("Enter the number of seats in each row:");
         x = scanner.nextInt();
 
-        //initialize cinemaHall
-        cinemaHall = new String[y+ 1][x + 1];
-        for (int i = 0; i <= y; i++) {
-            for (int j = 0; j <= x; j++) {
-                if (i == 0) {
-                    if (j == 0) {
-                        cinemaHall[0][0] = " ";
-                    } else {
-                        cinemaHall[i][j] = Integer.toString(j);
-                    }
-                } else {
-                    if (j == 0) {
-                        cinemaHall[i][j] = Integer.toString(i);
-                    } else {
-                        cinemaHall[i][j] = "S";
-                    }
-                }
-                
+        //initialize
+        cinemaHall = new String[y][x];
+        for (String[] i: cinemaHall) {
+            for (String j:i) {
+                i[j] = "S";
             }
         }
 
@@ -85,8 +72,12 @@ public class Cinema {
 
 
     //write picture of cinema
+    // TODO: Надо поправить структуру согласно изменениям хранения в array
     public static void printCinemaHall() {
-        System.out.println("\nCinema:");
+        System.out.println("\nCinema:\n  ");
+        for (int i = 1; i < x; i++) {
+            System.out.print(i + " ");
+        }
         for (String[] i: cinemaHall) {
             for (String j: i) {
                 System.out.print(j + " ");

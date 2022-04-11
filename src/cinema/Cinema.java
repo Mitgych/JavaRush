@@ -10,6 +10,12 @@ public class Cinema {
     public static int ySeat;
     public static int price;
     public static String[][] cinemaHall;
+    //Statistics variables
+    public static int countSoldTicket = 0;
+    public static double countSoldTicketPersent = 0;
+    public static int currIncome = 0;
+    public static int totalIncome;
+
 
 
     public static void main(String[] args) {
@@ -21,12 +27,17 @@ public class Cinema {
         System.out.println("Enter the number of seats in each row:");
         x = scanner.nextInt();
 
-        //initialize
-        cinemaHall = new String[y][x];
-        for (String[] i: cinemaHall) {
+        cinemaHall = new String[y][x]; //initialize cinemaHall
+        for (String[] i: cinemaHall) { //set start parameters in cinemaHall
             for (int j = 0; j < x; j++) {
                 i[j] = "S";
             }
+        }
+
+        if (x * y <= 60) {
+            totalIncome = x * y * 10; //initialize totalIncome
+        } else {
+            totalIncome = y / 2 * x * 10 + (y - y / 2) * x * 8;
         }
 
         //start menu
@@ -37,6 +48,7 @@ public class Cinema {
             switch (choice) {
                 case 1 -> printCinemaHall();
                 case 2 -> buy();
+                case 3 -> statistics();
 
             }
         }
@@ -50,7 +62,7 @@ public class Cinema {
         ySeat = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
         xSeat = scanner.nextInt();
-        cinemaHall[ySeat][xSeat] = "B";
+        cinemaHall[ySeat - 1][xSeat - 1] = "B";
 
         //write ticket price
         if (x * y <= 60) {
@@ -62,6 +74,11 @@ public class Cinema {
         }
         System.out.printf("\nTicket price: $%d", price);
         System.out.println();
+
+        countSoldTicket += 1;
+        // TODO: разобраться с рассчетом в double
+        countSoldTicketPersent = countSoldTicket / x * y;
+        currIncome += price;
     }
 
 
@@ -85,6 +102,13 @@ public class Cinema {
 
     //print menu
     public static void menu() {
-        System.out.println("1. Show the seats\n2. Buy a ticket\n0. Exit\n");
+        System.out.println("1. Show the seats\n2. Buy a ticket\n3. Statistics\n0. Exit\n");
+    }
+
+    // TODO: finish this method
+    public static void statistics() {
+
     }
 }
+
+

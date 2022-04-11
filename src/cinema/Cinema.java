@@ -30,19 +30,13 @@ public class Cinema {
         }
 
         //start menu
-        int choise = 1;
-        while (choise != 0) {
+        int choice = 1;
+        while (choice != 0) {
             menu();
-            choise = scanner.nextInt();
-            switch (choise) {
-                case 1 -> {
-                    printCinemaHall();
-                    break;
-                }
-                case 2 -> {
-                    buy();
-                    break;
-                }
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> printCinemaHall();
+                case 2 -> buy();
 
             }
         }
@@ -72,16 +66,17 @@ public class Cinema {
 
 
     //write picture of cinema
-    // TODO: Надо поправить структуру согласно изменениям хранения в array
     public static void printCinemaHall() {
-        System.out.println("\nCinema:\n  ");
+        System.out.println("\nCinema:\n");
+        System.out.print("  ");
         for (int i = 1; i <= x; i++) {
             System.out.print(i + " ");
         }
-        for (String[] i: cinemaHall) {
-            for (int j = 1; j < y; j++) {
-                System.out.print(j + " ");
-                System.out.print(i[j] + " ");
+        System.out.println();
+        for (int i = 0; i < y; i++) {
+            System.out.print(i + 1 + " ");
+            for (int j = 0; j < x; j++) {
+                System.out.print(cinemaHall[i][j] + " ");
             }
             System.out.println();
         }

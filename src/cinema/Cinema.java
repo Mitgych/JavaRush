@@ -24,7 +24,7 @@ public class Cinema {
         //initialize
         cinemaHall = new String[y][x];
         for (String[] i: cinemaHall) {
-            for (String j:i) {
+            for (int j = 0; j < x; j++) {
                 i[j] = "S";
             }
         }
@@ -75,12 +75,13 @@ public class Cinema {
     // TODO: Надо поправить структуру согласно изменениям хранения в array
     public static void printCinemaHall() {
         System.out.println("\nCinema:\n  ");
-        for (int i = 1; i < x; i++) {
+        for (int i = 1; i <= x; i++) {
             System.out.print(i + " ");
         }
         for (String[] i: cinemaHall) {
-            for (String j: i) {
+            for (int j = 1; j < y; j++) {
                 System.out.print(j + " ");
+                System.out.print(i[j] + " ");
             }
             System.out.println();
         }

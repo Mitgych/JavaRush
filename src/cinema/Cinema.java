@@ -19,8 +19,9 @@ public class Cinema {
 
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            try (Scanner scanner = new Scanner(System.in)){
+            try {
                 //Read sizes of cinema
                 System.out.println("Enter the number of rows:");
                 y = scanner.nextInt();
@@ -46,11 +47,14 @@ public class Cinema {
         }
 
         //start menu
-        try (Scanner scanner = new Scanner(System.in)){
+        try {
             int choice = 1;
             while (choice != 0) {
                 menu();
                 choice = scanner.nextInt(); // TODO: Проблема со сканером
+                //if (choice == 0) {
+                //    scanner.close();
+                //}
                 if (choice >= 0 && choice <= 3) {
                     switch (choice) {
                         case 1 -> printCinemaHall();
@@ -68,8 +72,9 @@ public class Cinema {
 
 
     public static void buy() {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            try (Scanner scanner = new Scanner(System.in);){
+            try {
                 System.out.println("Enter a row number:");
                 ySeat = scanner.nextInt();
                 System.out.println("Enter a seat number in that row:");
@@ -123,7 +128,6 @@ public class Cinema {
         System.out.println("\n1. Show the seats\n2. Buy a ticket\n3. Statistics\n0. Exit\n");
     }
 
-    // TODO: finish this method
     public static void statistics() {
         System.out.printf("\nNumber of purchased tickets: %d\n", countSoldTicket);
         System.out.printf("Percentage: %.2f%%\n", countSoldTicketPercent);

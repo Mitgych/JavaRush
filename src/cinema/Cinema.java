@@ -84,24 +84,24 @@ public class Cinema {
                     continue;
                 }
                 cinemaHall[ySeat - 1][xSeat - 1] = "B";
+                
+                //write ticket price
+                if (x * y <= 60) {
+                    price = 10;
+                } else if (ySeat <= y / 2) {
+                    price = 10;
+                } else {
+                    price = 8;
+                }
+                System.out.printf("\nTicket price: $%d", price);
+                System.out.println();
+                countSoldTicket += 1;
+                countSoldTicketPercent = (double) countSoldTicket / x / y * 100;
+                currIncome += price;
                 break;
             } catch (Exception e) {
                 System.out.println("Wrong input!");
             }
-
-            //write ticket price
-            if (x * y <= 60) {
-                price = 10;
-            } else if (ySeat <= y / 2) {
-                price = 10;
-            } else {
-                price = 8;
-            }
-            System.out.printf("\nTicket price: $%d", price);
-            System.out.println();
-            countSoldTicket += 1;
-            countSoldTicketPercent = (double) countSoldTicket / x / y * 100;
-            currIncome += price;
         }
     }
 

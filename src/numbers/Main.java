@@ -79,6 +79,16 @@ public class Main {
             } else {
                 this.isBuzz = false;
             }
+
+            String numberAsString = Integer.toString(number);
+            if (numberAsString.charAt(0) == '0') {
+                numberAsString = numberAsString.substring(1);
+            }
+            if (numberAsString.contains("0")) {
+                this.isDuck = true;
+            } else {
+                this.isDuck = false;
+            }
         }
     }
 }

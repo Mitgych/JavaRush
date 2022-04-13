@@ -51,7 +51,7 @@ public class Cinema {
             int choice = 1;
             while (choice != 0) {
                 menu();
-                choice = scanner.nextInt(); // TODO: Проблема со сканером
+                choice = scanner.nextInt();
                 //if (choice == 0) {
                 //    scanner.close();
                 //}

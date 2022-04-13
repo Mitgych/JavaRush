@@ -13,6 +13,7 @@ class FixingStringIndexOutOfBoundsException {
         } catch (Exception e) {
             System.out.println("Out of bounds!");
         }
+        scanner.close();
         
     }
 }

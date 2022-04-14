@@ -1,16 +1,15 @@
 package numbers;
 
 public class Number {
-    private int value;
+    private long value;
     private boolean isBuzz;
-    //private boolean divisibleBySeven;
-    //private boolean EndsWithSeven;
     private boolean isOdd;
     private boolean isEven;
     private boolean isDuck;
+    private boolean isPalindromic;
 
 
-    public Number(int number) {
+    public Number(long number) {
         this.value = number;
         
         if (number % 2 == 0) {
@@ -21,25 +20,13 @@ public class Number {
             this.isEven = false;
         }
 
-        //if (number % 10 == 7) {
-        //    this.EndsWithSeven= true;
-        //} else {
-        //    this.EndsWithSeven= false;
-        //}
-//
-        //if (number % 7 == 0) {
-        //    this.divisibleBySeven= true;
-        //} else {
-        //    this.divisibleBySeven= false;
-        //}
-
         if (number % 7 == 0 || number % 10 == 7) {
             this.isBuzz = true;
         } else {
             this.isBuzz = false;
         }
 
-        String numberAsString = Integer.toString(number);
+        String numberAsString = Long.toString(number);
         if (numberAsString.charAt(0) == '0') {
             numberAsString = numberAsString.substring(1);
         }
@@ -48,14 +35,23 @@ public class Number {
         } else {
             this.isDuck = false;
         }
+
+        var str1 = Long.toString(number);
+        var str = new StringBuilder(str1);
+        if (str.reverse().toString().equals(str1)) {
+            this.isPalindromic = true;
+        } else {
+            this.isPalindromic = false;
+        }
     }
 
 
     public void print() {
         System.out.println("Properties of " + this.value +
-                    "\neven: " +  this.isEven + 
-                    "\nodd: " + this.isOdd + 
-                    "\nbuzz: " + this.isBuzz + 
-                    "\nduck: " + this.isDuck);
+                    "\n       even: " +  this.isEven + 
+                    "\n        odd: " + this.isOdd + 
+                    "\n       buzz: " + this.isBuzz + 
+                    "\n       duck: " + this.isDuck + 
+                    "\npalindromic: " + this.isPalindromic);
     }
 }

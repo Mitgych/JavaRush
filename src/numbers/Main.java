@@ -5,9 +5,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Welcome to Amazing Numbers!\n\n" + 
-                "Supported requests:\n" + 
-                "- enter a natural number to know its properties;\n" + 
+        System.out.print("Welcome to Amazing Numbers!\n\n" +
+                "Supported requests:\n" +
+                "- enter a natural number to know its properties;\n" +
+                "- enter two natural numbers to obtain the properties of the list:" +
+                "  * the first parameter represents a starting number;" +
+                "  * the second parameter shows how many consecutive numbers are to be processed;" +
+                "- separate the parameters with one space;" +
                 "- enter 0 to exit.\n\n");
         long readNumber = -1;
         while (true) {
@@ -26,6 +30,4 @@ public class Main {
         }
         scanner.close();
     }
-
-
 }

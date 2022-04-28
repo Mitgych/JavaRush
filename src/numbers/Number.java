@@ -1,13 +1,13 @@
 package numbers;
 
 public class Number {
-    protected long value;
-    protected boolean isBuzz;
-    protected boolean isOdd;
-    protected boolean isEven;
-    protected boolean isDuck;
-    protected boolean isPalindromic;
-    protected boolean isGapful;
+    private long value;
+    private boolean isBuzz;
+    private boolean isOdd;
+    private boolean isEven;
+    private boolean isDuck;
+    private boolean isPalindromic;
+    private boolean isGapful;
 
 
 
@@ -40,12 +40,11 @@ public class Number {
 
         //The gapful number are determines here
         if (Math.abs(number) > 99) {
-            String firstDigit = Long.toString(number % 10);
+            long lastDigit = number % 10;
             //find last digit
             int degree = (int) Math.log10(number);
-            Long lastDigitLong = (number / (long)(Math.pow(10, degree)));
-            String lastDigit = Long.toString(lastDigitLong);
-            Long number2 = Long.getLong(firstDigit + lastDigit);
+            long firstDigit = number / (long) (Math.pow(10, degree));
+            long number2 = firstDigit * 10 + lastDigit;
             this.isGapful = number % number2 == 0;
         } else this.isGapful = false;
 
@@ -59,6 +58,32 @@ public class Number {
                 "\n       buzz: " + this.isBuzz +
                 "\n       duck: " + this.isDuck +
                 "\npalindromic: " + this.isPalindromic +
-                "\n     gapful: " + this.isGapful);
+                "\n     gapful: " + this.isGapful +
+                "\n");
+    }
+
+    public void printList() {
+        StringBuilder result = new StringBuilder();
+        result.append(this.value).append(" is");
+        if (this.isEven) {
+            result.append(" even,");
+        }
+        if (this.isOdd) {
+            result.append(" odd,");
+        }
+        if (this.isBuzz) {
+            result.append(" buzz,");
+        }
+        if (this.isDuck) {
+            result.append(" duck,");
+        }
+        if (this.isPalindromic) {
+            result.append(" palindromic,");
+        }
+        if (this.isGapful) {
+            result.append(" gapful,");
+        }
+        result.deleteCharAt(result.length() - 1);
+        System.out.println(result);
     }
 }

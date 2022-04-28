@@ -1,19 +1,18 @@
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-class FixingStringIndexOutOfBoundsException {
-
+public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        String string = scanner.nextLine();
-        int index = scanner.nextInt();
-
-        try {
-            System.out.println(string.charAt(index));
-        } catch (Exception e) {
-            System.out.println("Out of bounds!");
+        try (Scanner scanner = new Scanner(System.in)) {
+            int i = 0;
+            while (scanner.hasNext()) {
+                System.out.println(scanner.nextLong());
+                i++;
+                System.out.println(i);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("ERROR!!!!");
         }
-        scanner.close();
-        
     }
+
 }

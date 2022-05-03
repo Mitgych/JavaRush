@@ -1,13 +1,16 @@
 package numbers;
 
+import java.util.ArrayList;
+
 public class Number {
-    private long value;
-    private boolean isBuzz;
-    private boolean isOdd;
-    private boolean isEven;
-    private boolean isDuck;
-    private boolean isPalindromic;
-    private boolean isGapful;
+    private final long value;
+    private final boolean isBuzz;
+    private final boolean isOdd;
+    private final boolean isEven;
+    private final boolean isDuck;
+    private final boolean isPalindromic;
+    private final boolean isGapful;
+    private final boolean isSpy;
 
 
 
@@ -35,7 +38,7 @@ public class Number {
 
         //The palindromic number are determines here
         var str1 = Long.toString(number);
-        var str = new StringBuilder(str1); //TODO: u can use String instead of StringBuilder
+        var str = new StringBuilder(str1);
         this.isPalindromic = str.reverse().toString().equals(str1);
 
         //The gapful number are determines here
@@ -48,6 +51,16 @@ public class Number {
             this.isGapful = number % number2 == 0;
         } else this.isGapful = false;
 
+        //The spy numbers are determines here
+        ArrayList<Integer> arr = new ArrayList<>();
+        long val = number;
+        while (val != 0) {
+            arr.add((int) val % 10);
+            val /= 10;
+        }
+        int sum = arr.stream().mapToInt(Integer::intValue).sum();
+        int multipl = arr.stream().reduce(1, (a, b) -> a * b);
+        isSpy = sum == multipl;
     }
 
 
@@ -59,6 +72,7 @@ public class Number {
                 "\n       duck: " + this.isDuck +
                 "\npalindromic: " + this.isPalindromic +
                 "\n     gapful: " + this.isGapful +
+                "\n        spy: " + this.isSpy +
                 "\n");
     }
 
@@ -83,7 +97,37 @@ public class Number {
         if (this.isGapful) {
             result.append(" gapful,");
         }
+        if (this.isSpy) {
+            result.append(" spy,");
+        }
         result.deleteCharAt(result.length() - 1);
         System.out.println(result);
+    }
+
+    public boolean isProperty(String prop) {
+        boolean result = false;
+        switch (prop) {
+            case "EVEN":
+                result = this.isEven;
+                break;
+            case "ODD":
+                result = this.isOdd;
+                break;
+            case "BUZZ":
+                result = this.isBuzz;
+                break;
+            case "DUCK": result = this.isDuck;
+                break;
+            case "PALINDROMIC":
+                result = this.isPalindromic;
+                break;
+            case "GAPFUL":
+                result = this.isGapful;
+                break;
+            case "SPY":
+                result = this.isSpy;
+                break;
+        }
+        return result;
     }
 }

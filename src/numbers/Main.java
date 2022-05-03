@@ -5,42 +5,57 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-    static final String ERROR1 = "The first parameter should be a natural number or zero,\n";
-    static final String ERROR2 = "The second parameter should be a natural number.\n";
-
-    static final String INSTRUCTION = """
-            Supported requests:
-            - enter a natural number to know its properties;
-            - enter two natural numbers to obtain the properties of the list:
-              * the first parameter represents a starting number;
-              * the second parameter shows how many consecutive numbers are to be processed;
-            - separate the parameters with one space;
-            - enter 0 to exit.
-            """;
+    static final String INSTRUCTION = "Supported requests:\n" +
+            "- enter a natural number to know its properties;\n" +
+            "- enter two natural numbers to obtain the properties of the list:\n" +
+            "  * the first parameter represents a starting number;\n" +
+            "  * the second parameter shows how many consecutive numbers are to be processed;\n" +
+            "- two natural numbers and a property to search for;\n" +
+            "- separate the parameters with one space;\n" +
+            "- enter 0 to exit.\n";
 
     public static void main(String[] args) {
-        long readNumber;
-        int count = 0;
-        long[] buffer;
+        long firstNumber;
+        long secondNumber;
+        String property;
+        List<String> buffer;
 
         System.out.println("Welcome to Amazing Numbers!\n");
         System.out.println(INSTRUCTION);
         while (true) {
             System.out.print("Enter a request: ");
-            buffer = ReadInput.inputNumb();
+            buffer = ReadInput.input();
             System.out.println();
-            if (buffer[0] == 0) { //Check exit
+
+            if (buffer.get(0).equals("0")) { //Check exit
                 break;
             }
-            if (buffer[0] > 0 && buffer[1] > 0) { // input two numbers
-                for (int i = 0; i < buffer[1]; i++) {
-                    Number number = new Number(buffer[0] + i);
-                    number.printList();
+
+            if (buffer.size() == 3) { //input two numbers and property
+                firstNumber = Long.parseLong(buffer.get(0));
+                secondNumber = Long.parseLong(buffer.get(1));
+                property = buffer.get(2).toUpperCase();
+                int count = 0;
+                Number num;
+                while (count < secondNumber) {
+                    num = new Number(firstNumber);
+                    if (num.isProperty(property)) {
+                        num.printList();
+                        count++;
+                    }
+                    firstNumber++;
                 }
-            } else if (buffer[0] > 0 && buffer[1] == -1) { //input one number
-                Number number = new Number(buffer[0]);
-                number.print();
+            } else if (buffer.size() == 2) { // input two numbers
+                firstNumber = Long.parseLong(buffer.get(0));
+                secondNumber = Long.parseLong(buffer.get(1));
+                for (int i = 0; i < secondNumber; i++) {
+                    Number num = new Number(firstNumber + i);
+                    num.printList();
+                }
+            } else if (buffer.size() == 1) { //input one number
+                firstNumber = Long.parseLong(buffer.get(0));
+                Number numb = new Number(firstNumber);
+                numb.print();
             }
         }
     }

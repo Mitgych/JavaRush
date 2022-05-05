@@ -1,8 +1,6 @@
 package numbers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     static final String INSTRUCTION = "Supported requests:\n" +
@@ -36,9 +34,8 @@ public class Main {
                 secondNumber = Long.parseLong(buffer.get(1));
                 property = buffer.get(2).toUpperCase();
                 int count = 0;
-                Number num;
                 while (count < secondNumber) {
-                    num = new Number(firstNumber);
+                    Number num = new Number(firstNumber);
                     if (num.isProperty(property)) {
                         num.printList();
                         count++;

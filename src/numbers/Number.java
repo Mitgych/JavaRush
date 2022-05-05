@@ -11,6 +11,8 @@ public class Number {
     private final boolean isPalindromic;
     private final boolean isGapful;
     private final boolean isSpy;
+    private final boolean isSunny;
+    private final boolean isSquare;
 
 
 
@@ -55,12 +57,18 @@ public class Number {
         ArrayList<Integer> arr = new ArrayList<>();
         long val = number;
         while (val != 0) {
-            arr.add((int) val % 10);
-            val /= 10;
+             arr.add((int) val % 10);
+             val /= 10;
         }
         int sum = arr.stream().mapToInt(Integer::intValue).sum();
         int multipl = arr.stream().reduce(1, (a, b) -> a * b);
         isSpy = sum == multipl;
+
+        //The square numbers sre determines here
+        this.isSquare = Math.sqrt(this.value) == (int) Math.sqrt(this.value);
+
+        //The sunny numbers sre determines here
+        this.isSunny = Math.sqrt(this.value + 1) == (int) Math.sqrt(this.value + 1);
     }
 
 
@@ -73,6 +81,8 @@ public class Number {
                 "\npalindromic: " + this.isPalindromic +
                 "\n     gapful: " + this.isGapful +
                 "\n        spy: " + this.isSpy +
+                "\n      sunny: " + this.isSunny +
+                "\n     square: " + this.isSquare +
                 "\n");
     }
 
@@ -100,6 +110,12 @@ public class Number {
         if (this.isSpy) {
             result.append(" spy,");
         }
+        if (this.isSunny) {
+            result.append(" sunny,");
+        }
+        if (this.isSquare) {
+            result.append(" square,");
+        }
         result.deleteCharAt(result.length() - 1);
         System.out.println(result);
     }
@@ -126,6 +142,12 @@ public class Number {
                 break;
             case "SPY":
                 result = this.isSpy;
+                break;
+            case "SUNNY":
+                result = this.isSunny;
+                break;
+            case "SQUARE":
+                result = this.isSquare;
                 break;
         }
         return result;

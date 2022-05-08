@@ -1,3 +1,4 @@
+
 package numbers;
 
 enum PropertiesOfNumbers {
@@ -12,17 +13,19 @@ enum PropertiesOfNumbers {
     SQUARE,
     JUMPING;
 
+
+    /**
+     * Returns exclusive property for the passed parameter
+     * If parameter haven't exclusive property - return itself
+     */
     public static PropertiesOfNumbers exclusiveProperty(PropertiesOfNumbers prop) {
         PropertiesOfNumbers result = EVEN;
         switch (prop) {
+            case JUMPING:
             case BUZZ:
-                result = BUZZ;
-                break;
             case PALINDROMIC:
-                result = PALINDROMIC;
-                break;
             case GAPFUL:
-                result = GAPFUL;
+                result = prop;
                 break;
             case ODD:
                 result = EVEN;
@@ -41,9 +44,6 @@ enum PropertiesOfNumbers {
                 break;
             case SQUARE:
                 result = SUNNY;
-                break;
-            case JUMPING:
-                result = JUMPING;
         }
         return result;
     }

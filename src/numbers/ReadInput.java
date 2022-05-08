@@ -16,7 +16,9 @@ public class ReadInput {
     static final String ERROR5 = "The request contains mutually exclusive properties: [%s, %s]\n" +
             "There are no numbers with these properties.";
 
-
+    /**
+     * Returns List with inputs. And checks all possible input errors
+     */
     public static List<String> input() {
         Scanner scanner  = new Scanner(System.in);
         List<String> result = new ArrayList<>(Arrays
@@ -34,7 +36,7 @@ public class ReadInput {
             System.out.println(ERROR2);
             System.out.print("\nEnter a request: ");
             result = input();
-        } else if (result.size() > 2 ) { //check properties
+        } else if (result.size() > 2 ) { //property validation
             List<String> notFoundProp;
 
             notFoundProp = result.subList(2, result.size()).stream()
@@ -52,7 +54,7 @@ public class ReadInput {
                 System.out.printf(ERROR4, notFoundProp.get(0), notFoundProp.get(1));
                 System.out.print("\nEnter a request: ");
                 result = input();
-            } else if (true) {
+            } else if (true) { //check exclusive properties
                 List<PropertiesOfNumbers> properties = new ArrayList<>();
 
                 for (String str: result.subList(2, result.size())) {

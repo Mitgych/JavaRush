@@ -8,6 +8,7 @@ public class Number {
     private final List<PropertiesOfNumbers> properties = new ArrayList<>();
     private final long value;
 
+
     public Number(long number) {
         this.value = number;
 
@@ -87,7 +88,13 @@ public class Number {
         }
     }
 
-
+    /**
+     * print all properties in table format, for example:
+     *              buzz: false
+     *              duck: true
+     *       palindromic: false
+     *etc.
+     */
     public void print() {
         System.out.printf(Locale.ENGLISH,"Properties of %,d%n", this.value);
         for (PropertiesOfNumbers i: PropertiesOfNumbers.values()) {
@@ -97,6 +104,9 @@ public class Number {
         }
     }
 
+    /**
+     * print only true properties in the line
+     */
     public void printList() {
         StringBuilder result = new StringBuilder();
         result.append(String.format(Locale.ENGLISH,"%,15d is", this.value));
@@ -108,6 +118,11 @@ public class Number {
         System.out.println(result);
     }
 
+    /**
+     * Return true if list of parameters of curr number contains accepted list of parameters
+     * @param input include necessary parameters
+     * @return true or false
+     */
     public boolean isProperties(List<PropertiesOfNumbers> input) {
         boolean result = true;
         for (PropertiesOfNumbers prop: input) {

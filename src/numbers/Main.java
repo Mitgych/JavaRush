@@ -1,5 +1,6 @@
 package numbers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -10,70 +11,63 @@ public class Main {
             "  * the second parameters show how many consecutive numbers are to be processed;\n" +
             "- two natural numbers and two properties to search for;\n" +
             "- separate the parameters with one space;\n" +
-            "- enter 0 to exit.";
+            "- enter 0 to exit.\n";
 
     public static void main(String[] args) {
         long firstNumber;
-        long secondNumber;
-        String property;
-        String property2;
-        List<String> buffer;
+        long secondNumber = 0;
+        List<PropertiesOfNumbers> properties = new ArrayList<>();
+        List<String> bufferInput;
 
         System.out.println("Welcome to Amazing Numbers!\n");
         System.out.println(INSTRUCTION);
         while (true) {
             System.out.print("Enter a request: ");
-            buffer = ReadInput.input();
+            bufferInput = ReadInput.input();
             System.out.println();
 
-            if (buffer.get(0).equals("0")) { //Check exit
+            if (bufferInput.get(0).equals("0")) { //Check exit
                 break;
             }
 
-            if (buffer.size() == 4) { //input two numbers and two property
-                firstNumber = Long.parseLong(buffer.get(0));
-                secondNumber = Long.parseLong(buffer.get(1));
-                property = buffer.get(2);
-                property2 = buffer.get(3);
+            //initialize parameters and properties
+            firstNumber = Long.parseLong(bufferInput.get(0));
+            if (bufferInput.size() > 1) {
+                secondNumber = Long.parseLong(bufferInput.get(1));
+            }
+            properties.clear();
+            if (bufferInput.size() > 2) {
+                for (String str: bufferInput.subList(2, bufferInput.size())) {
+                    properties.add(PropertiesOfNumbers.valueOf(str));
+                }
+            }
 
+
+            if (bufferInput.size() > 2) { //input two numbers and some properties
                 int count = 0;
                 while (count < secondNumber) {
                     Number num = new Number(firstNumber);
-                    if (num.isProperty(property) && num.isProperty(property2)) {
+                    if (num.isProperties(properties)) {
                         num.printList();
                         count++;
                     }
                     firstNumber++;
                 }
                 System.out.println();
-            } else if (buffer.size() == 3) { //input two numbers and one property
-                firstNumber = Long.parseLong(buffer.get(0));
-                secondNumber = Long.parseLong(buffer.get(1));
-                property = buffer.get(2);
-
-                int count = 0;
-                while (count < secondNumber) {
-                    Number num = new Number(firstNumber);
-                    if (num.isProperty(property)) {
-                        num.printList();
-                        count++;
-                    }
-                    firstNumber++;
-                }
-                System.out.println();
-            } else if (buffer.size() == 2) { // input two numbers
-                firstNumber = Long.parseLong(buffer.get(0));
-                secondNumber = Long.parseLong(buffer.get(1));
+            } else if (bufferInput.size() == 2) { // input two numbers
+                firstNumber = Long.parseLong(bufferInput.get(0));
+                secondNumber = Long.parseLong(bufferInput.get(1));
 
                 for (int i = 0; i < secondNumber; i++) {
                     Number num = new Number(firstNumber + i);
                     num.printList();
                 }
-            } else if (buffer.size() == 1) { //input one number
-                firstNumber = Long.parseLong(buffer.get(0));
+            } else { //input one number
+                firstNumber = Long.parseLong(bufferInput.get(0));
 
                 Number numb = new Number(firstNumber);
                 numb.print();
+                System.out.println();
             }
         }
     }

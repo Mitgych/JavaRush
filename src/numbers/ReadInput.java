@@ -10,18 +10,12 @@ public class ReadInput {
     static final String ERROR1 = "The first parameter should be a natural number or zero,\n";
     static final String ERROR2 = "The second parameter should be a natural number.\n";
     static final String ERROR3 = "The property [%s] is wrong.\n" +
-            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE]";
+            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING]";
     static final String ERROR4 = "The properties [%s, %s] are wrong.\n" +
-            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE]";
+            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING]";
     static final String ERROR5 = "The request contains mutually exclusive properties: [%s, %s]\n" +
             "There are no numbers with these properties.";
-    static final String[] PROPERTIES = {"EVEN", "ODD", "BUZZ", "DUCK", "PALINDROMIC",
-            "GAPFUL", "SPY", "SUNNY", "SQUARE"};
-    static final String[][] EXCLUSIVE_PROPERTIES = {
-            {"EVEN", "ODD"}, {"ODD", "EVEN"},
-            {"DUCK", "SPY"}, {"SPY", "DUCK"},
-            {"SUNNY", "SQUARE"}, {"SQUARE", "SUNNY"}
-    };
+
 
     public static List<String> input() {
         Scanner scanner  = new Scanner(System.in);
@@ -41,29 +35,39 @@ public class ReadInput {
             System.out.print("\nEnter a request: ");
             result = input();
         } else if (result.size() > 2 ) { //check properties
-            List<String> buff = new ArrayList<>();
-            final String[] properties2 = result.subList(2, result.size()).toArray(new String[2]);
+            List<String> notFoundProp;
 
-            //write in buff wrong properties
-            for (String str: result.subList(2, result.size())) {
-                if (Arrays.stream(PROPERTIES).noneMatch(str::equals)){
-                    buff.add(str);
+            notFoundProp = result.subList(2, result.size()).stream()
+                    .filter(e ->
+                            Arrays.stream(PropertiesOfNumbers.values())
+                            .noneMatch(i -> i.name().equals(e)))
+                    .collect(Collectors.toList());
+
+            //print error depending on number of wrong properties in notFoundProp. and check exclusive properties
+            if (notFoundProp.size() == 1) {
+                System.out.printf(ERROR3, notFoundProp.get(0));
+                System.out.print("\nEnter a request: ");
+                result = input();
+            } else if (notFoundProp.size() == 2){
+                System.out.printf(ERROR4, notFoundProp.get(0), notFoundProp.get(1));
+                System.out.print("\nEnter a request: ");
+                result = input();
+            } else if (true) {
+                List<PropertiesOfNumbers> properties = new ArrayList<>();
+
+                for (String str: result.subList(2, result.size())) {
+                    properties.add(PropertiesOfNumbers.valueOf(str));
                 }
-            }
 
-            //print error depending on number of wrong properties in buff. and check exclusive properties
-            if (buff.size() == 1) {
-                System.out.printf(ERROR3, buff.get(0));
-                System.out.print("\nEnter a request: ");
-                result = input();
-            } else if (buff.size() == 2){
-                System.out.printf(ERROR4, buff.get(0), buff.get(1));
-                System.out.print("\nEnter a request: ");
-                result = input();
-            } else if (Arrays.stream(EXCLUSIVE_PROPERTIES).anyMatch(e -> Arrays.equals(e, properties2))) {
-                System.out.printf(ERROR5, result.get(2), result.get(3));
-                System.out.print("\nEnter a request: ");
-                result = input();
+                for (PropertiesOfNumbers prop: properties) {
+                    PropertiesOfNumbers prop2 = PropertiesOfNumbers.exclusiveProperty(prop);
+                    if (prop != prop2 && properties.contains(prop2)) {
+                        System.out.printf(ERROR5, prop, PropertiesOfNumbers.exclusiveProperty(prop));
+                        System.out.print("\nEnter a request: ");
+                        result = input();
+                        break;
+                    }
+                }
             }
         }
         return result;

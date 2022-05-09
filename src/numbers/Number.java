@@ -86,6 +86,38 @@ public class Number {
         if (jumping) {
             properties.add(PropertiesOfNumbers.JUMPING);
         }
+        
+        //The happy number are determined here
+        if (isHappy(number)) {
+            properties.add(PropertiesOfNumbers.HAPPY);
+        } else {
+            properties.add(PropertiesOfNumbers.SAD);
+        }
+    }
+
+    /**
+     * Return sum of all digits of number. Perfect digital invariant!
+     * Use for initialize HAPPY/UNHAPPY property
+     */
+    private static int pdiFunction(long number) {
+        int result = 0;
+        while (number > 0) {
+            result += Math.pow(number % 10, 2);
+            number /= 10;
+        }
+        return result;
+    }
+
+    /**
+     * Determine if the specified number is a happy number
+     */
+    private static boolean isHappy(long number) {
+        List<Long> seenNumbers = new ArrayList<>();
+        while (number > 1 && !seenNumbers.contains(number)) {
+            seenNumbers.add(number);
+            number =pdiFunction(number);
+        }
+        return number == 1;
     }
 
     /**
@@ -119,14 +151,23 @@ public class Number {
     }
 
     /**
-     * Return true if list of parameters of curr number contains accepted list of parameters
-     * @param input include necessary parameters
+     * Return true if list of parameters of curr number contains necessary parameters
+     * @param includeParams include necessary parameters
+     * @param excludeParams include excluded parameters
      * @return true or false
      */
-    public boolean isProperties(List<PropertiesOfNumbers> input) {
+    public boolean isProperties(List<PropertiesOfNumbers> includeParams, List<PropertiesOfNumbers> excludeParams) {
         boolean result = true;
-        for (PropertiesOfNumbers prop: input) {
+        for (PropertiesOfNumbers prop: includeParams) {
             if (this.properties.contains(prop)) {
+                //all ok
+            } else {
+                result = false;
+                break;
+            }
+        }
+        for (PropertiesOfNumbers prop: excludeParams) {
+            if (!this.properties.contains(prop)) {
                 //all ok
             } else {
                 result = false;

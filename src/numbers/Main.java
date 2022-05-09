@@ -8,15 +8,17 @@ public class Main {
             "- enter a natural number to know its properties;\n" +
             "- enter two natural numbers to obtain the properties of the list:\n" +
             "  * the first parameter represents a starting number;\n" +
-            "  * the second parameters show how many consecutive numbers are to be processed;\n" +
-            "- two natural numbers and two properties to search for;\n" +
+            "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
+            "- two natural numbers and properties to search for;\n" +
+            "- a property preceded by minus must not be present in numbers;\n" +
             "- separate the parameters with one space;\n" +
             "- enter 0 to exit.\n";
 
     public static void main(String[] args) {
         long firstNumber;
         long secondNumber = 0;
-        List<PropertiesOfNumbers> properties = new ArrayList<>();
+        List<PropertiesOfNumbers> includeProps = new ArrayList<>();
+        List<PropertiesOfNumbers> excludeProps = new ArrayList<>();
         List<String> bufferInput;
 
         System.out.println("Welcome to Amazing Numbers!\n");
@@ -30,24 +32,29 @@ public class Main {
                 break;
             }
 
-            //initialize parameters and properties
+            //initialize parameters and includeProps
             firstNumber = Long.parseLong(bufferInput.get(0));
             if (bufferInput.size() > 1) {
                 secondNumber = Long.parseLong(bufferInput.get(1));
             }
-            properties.clear();
+            includeProps.clear();
+            excludeProps.clear();
             if (bufferInput.size() > 2) {
                 for (String str: bufferInput.subList(2, bufferInput.size())) {
-                    properties.add(PropertiesOfNumbers.valueOf(str));
+                    if (str.charAt(0) == '-') {
+                        excludeProps.add(PropertiesOfNumbers.valueOf(str.replaceFirst("-", "")));
+                    } else {
+                        includeProps.add(PropertiesOfNumbers.valueOf(str));
+                    }
                 }
             }
 
 
-            if (bufferInput.size() > 2) { //input two numbers and some properties
+            if (bufferInput.size() > 2) { //input two numbers and some includeProps
                 int count = 0;
                 while (count < secondNumber) {
                     Number num = new Number(firstNumber);
-                    if (num.isProperties(properties)) {
+                    if (num.isProperties(includeProps, excludeProps)) {
                         num.printList();
                         count++;
                     }

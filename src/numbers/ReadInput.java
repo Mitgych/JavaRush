@@ -10,9 +10,9 @@ public class ReadInput {
     static final String ERROR1 = "The first parameter should be a natural number or zero,\n";
     static final String ERROR2 = "The second parameter should be a natural number.\n";
     static final String ERROR3 = "The property [%s] is wrong.\n" +
-            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING]";
+            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING, HAPPY, SAD]";
     static final String ERROR4 = "The properties [%s, %s] are wrong.\n" +
-            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING]";
+            "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING, HAPPY, SAD]";
     static final String ERROR5 = "The request contains mutually exclusive properties: [%s, %s]\n" +
             "There are no numbers with these properties.";
 
@@ -39,10 +39,11 @@ public class ReadInput {
         } else if (result.size() > 2 ) { //property validation
             List<String> notFoundProp;
 
+            //add all properties, that not find in PropertiesOfNumbers.values()
             notFoundProp = result.subList(2, result.size()).stream()
                     .filter(e ->
                             Arrays.stream(PropertiesOfNumbers.values())
-                            .noneMatch(i -> i.name().equals(e)))
+                            .noneMatch(i -> i.name().equals(e.replaceFirst("-", ""))))
                     .collect(Collectors.toList());
 
             //print error depending on number of wrong properties in notFoundProp. and check exclusive properties
@@ -54,20 +55,46 @@ public class ReadInput {
                 System.out.printf(ERROR4, notFoundProp.get(0), notFoundProp.get(1));
                 System.out.print("\nEnter a request: ");
                 result = input();
-            } else if (true) { //check exclusive properties
-                List<PropertiesOfNumbers> properties = new ArrayList<>();
+            } else if (true) { //check exclusive includeProps
+                List<PropertiesOfNumbers> includeProps = new ArrayList<>();
+                List<PropertiesOfNumbers> excludeProps = new ArrayList<>();
 
                 for (String str: result.subList(2, result.size())) {
-                    properties.add(PropertiesOfNumbers.valueOf(str));
+                    if (str.charAt(0) == '-') {
+                        excludeProps.add(PropertiesOfNumbers.valueOf(str.replaceFirst("-", "")));
+                    } else {
+                        includeProps.add(PropertiesOfNumbers.valueOf(str));
+                    }
                 }
 
-                for (PropertiesOfNumbers prop: properties) {
-                    PropertiesOfNumbers prop2 = PropertiesOfNumbers.exclusiveProperty(prop);
-                    if (prop != prop2 && properties.contains(prop2)) {
-                        System.out.printf(ERROR5, prop, PropertiesOfNumbers.exclusiveProperty(prop));
+                for (PropertiesOfNumbers prop: includeProps) {
+                    PropertiesOfNumbers prop2 = PropertiesOfNumbers.exclusionaryProperty(prop);
+                    if (prop != prop2 && includeProps.contains(prop2)) {
+                        System.out.printf(ERROR5, prop, PropertiesOfNumbers.exclusionaryProperty(prop));
                         System.out.print("\nEnter a request: ");
                         result = input();
                         break;
+                    }
+                }
+
+                for (PropertiesOfNumbers prop: excludeProps) {
+                    PropertiesOfNumbers prop2 = PropertiesOfNumbers.exclusionaryProperty(prop);
+                    if (prop != prop2 && excludeProps.contains(prop2)) {
+                        System.out.printf(ERROR5, prop, PropertiesOfNumbers.exclusionaryProperty(prop));
+                        System.out.print("\nEnter a request: ");
+                        result = input();
+                        break;
+                    }
+                }
+
+                for (PropertiesOfNumbers prop: excludeProps) {
+                    for (PropertiesOfNumbers prop2: includeProps) {
+                        if (prop == prop2) {
+                            System.out.printf(ERROR5, "-" + prop, prop2);
+                            System.out.print("\nEnter a request: ");
+                            result = input();
+                            break;
+                        }
                     }
                 }
             }

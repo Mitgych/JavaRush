@@ -81,6 +81,7 @@ public class Number {
         for (int i = 1; i < chars.length; i++) {
             if (Math.abs(chars[i] - chars[i - 1]) != 1) {
                 jumping = false;
+                break;
             }
         }
         if (jumping) {

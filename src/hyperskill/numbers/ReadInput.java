@@ -21,9 +21,8 @@ public class ReadInput {
      */
     public static List<String> input() {
         Scanner scanner  = new Scanner(System.in);
-        List<String> result = new ArrayList<>(Arrays
-                .stream(scanner.nextLine().toUpperCase().split("\\s+"))
-                .collect(Collectors.toList()));
+        List<String> result = Arrays
+                .stream(scanner.nextLine().toUpperCase().split("\\s+")).collect(Collectors.toList());
 
         if (result.isEmpty()) { //check empty input
             System.out.println(Main.INSTRUCTION);
@@ -55,7 +54,7 @@ public class ReadInput {
                 System.out.printf(ERROR4, notFoundProp.get(0), notFoundProp.get(1));
                 System.out.print("\nEnter a request: ");
                 result = input();
-            } else if (true) { //check exclusive includeProps
+            } else { //check exclusive includeProps
                 List<PropertiesOfNumbers> includeProps = new ArrayList<>();
                 List<PropertiesOfNumbers> excludeProps = new ArrayList<>();
 
@@ -64,16 +63,6 @@ public class ReadInput {
                         excludeProps.add(PropertiesOfNumbers.valueOf(str.replaceFirst("-", "")));
                     } else {
                         includeProps.add(PropertiesOfNumbers.valueOf(str));
-                    }
-                }
-
-                for (PropertiesOfNumbers prop: includeProps) {
-                    PropertiesOfNumbers prop2 = PropertiesOfNumbers.exclusionaryProperty(prop);
-                    if (prop != prop2 && includeProps.contains(prop2)) {
-                        System.out.printf(ERROR5, prop, PropertiesOfNumbers.exclusionaryProperty(prop));
-                        System.out.print("\nEnter a request: ");
-                        result = input();
-                        break;
                     }
                 }
 

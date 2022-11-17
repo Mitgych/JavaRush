@@ -1,10 +1,10 @@
 package codeWars.reverseWords;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 class KataTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void reverseWords() {
         assertEquals("ehT kciuq nworb xof spmuj revo eht yzal .god", Kata.reverseWords("The quick brown fox jumps over the lazy dog."));
         assertEquals("elppa", Kata.reverseWords("apple"));

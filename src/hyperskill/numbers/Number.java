@@ -52,7 +52,7 @@ public class Number {
             }
         }
 
-        //The spy hyperskill.numbers are determines here
+        //The spy numbers are determines here
         ArrayList<Integer> arr = new ArrayList<>();
         long number1 = number;
         while (number1 != 0) {
@@ -65,17 +65,17 @@ public class Number {
             properties.add(PropertiesOfNumbers.SPY);
         }
 
-        //The square hyperskill.numbers sre determines here
+        //The square numbers sre determines here
         if (Math.sqrt(number) == (int) Math.sqrt(number)) {
             properties.add(PropertiesOfNumbers.SQUARE);
         }
 
-        //The sunny hyperskill.numbers sre determines here
+        //The sunny numbers sre determines here
         if (Math.sqrt(number + 1) == (int) Math.sqrt(number + 1)) {
             properties.add(PropertiesOfNumbers.SUNNY);
         }
 
-        //The jumping hyperskill.numbers are determined here
+        //The jumping numbers are determined here
         char[] chars = Long.toString(number).toCharArray();
         boolean jumping = true;
         for (int i = 1; i < chars.length; i++) {

@@ -7,11 +7,11 @@ public class Main {
     static final String INSTRUCTION = """
             Supported requests:
             - enter a natural number to know its properties;
-            - enter two natural hyperskill.numbers to obtain the properties of the list:
+            - enter two natural numbers to obtain the properties of the list:
               * the first parameter represents a starting number;
-              * the second parameter shows how many consecutive hyperskill.numbers are to be printed;
-            - two natural hyperskill.numbers and properties to search for;
-            - a property preceded by minus must not be present in hyperskill.numbers;
+              * the second parameter shows how many consecutive numbers are to be printed;
+            - two natural numbers and properties to search for;
+            - a property preceded by minus must not be present in numbers;
             - separate the parameters with one space;
             - enter 0 to exit.
             """;
@@ -52,7 +52,7 @@ public class Main {
             }
 
 
-            if (bufferInput.size() > 2) { //input two hyperskill.numbers and some includeProps
+            if (bufferInput.size() > 2) { //input two numbers and some includeProps
                 int count = 0;
                 while (count < secondNumber) {
                     Number num = new Number(firstNumber);
@@ -63,7 +63,7 @@ public class Main {
                     firstNumber++;
                 }
                 System.out.println();
-            } else if (bufferInput.size() == 2) { // input two hyperskill.numbers
+            } else if (bufferInput.size() == 2) { // input two numbers
                 firstNumber = Long.parseLong(bufferInput.get(0));
                 secondNumber = Long.parseLong(bufferInput.get(1));
 

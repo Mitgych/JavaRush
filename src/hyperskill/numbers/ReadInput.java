@@ -14,7 +14,7 @@ public class ReadInput {
     static final String ERROR4 = "The properties [%s, %s] are wrong.\n" +
             "Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SUNNY, SQUARE, JUMPING, HAPPY, SAD]";
     static final String ERROR5 = "The request contains mutually exclusive properties: [%s, %s]\n" +
-            "There are no hyperskill.numbers with these properties.";
+            "There are no numbers with these properties.";
 
     /**
      * Returns List with inputs. And checks all possible input errors

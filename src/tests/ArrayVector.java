@@ -1,4 +1,4 @@
-package testInterface;
+package tests;
 
 public class ArrayVector implements Vector{
     double[] arr;

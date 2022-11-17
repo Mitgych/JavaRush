@@ -1,4 +1,4 @@
-package numbers;
+package hyperskill.numbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 public class Main {
     static final String INSTRUCTION = "Supported requests:\n" +
             "- enter a natural number to know its properties;\n" +
-            "- enter two natural numbers to obtain the properties of the list:\n" +
+            "- enter two natural hyperskill.numbers to obtain the properties of the list:\n" +
             "  * the first parameter represents a starting number;\n" +
-            "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
-            "- two natural numbers and properties to search for;\n" +
-            "- a property preceded by minus must not be present in numbers;\n" +
+            "  * the second parameter shows how many consecutive hyperskill.numbers are to be printed;\n" +
+            "- two natural hyperskill.numbers and properties to search for;\n" +
+            "- a property preceded by minus must not be present in hyperskill.numbers;\n" +
             "- separate the parameters with one space;\n" +
             "- enter 0 to exit.\n";
 
@@ -50,7 +50,7 @@ public class Main {
             }
 
 
-            if (bufferInput.size() > 2) { //input two numbers and some includeProps
+            if (bufferInput.size() > 2) { //input two hyperskill.numbers and some includeProps
                 int count = 0;
                 while (count < secondNumber) {
                     Number num = new Number(firstNumber);
@@ -61,7 +61,7 @@ public class Main {
                     firstNumber++;
                 }
                 System.out.println();
-            } else if (bufferInput.size() == 2) { // input two numbers
+            } else if (bufferInput.size() == 2) { // input two hyperskill.numbers
                 firstNumber = Long.parseLong(bufferInput.get(0));
                 secondNumber = Long.parseLong(bufferInput.get(1));
 

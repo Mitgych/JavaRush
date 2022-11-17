@@ -1,4 +1,4 @@
-package testInterface;
+package tests;
 
 public interface Vector {
     /**

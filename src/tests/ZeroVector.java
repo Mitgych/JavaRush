@@ -1,4 +1,4 @@
-package testInterface;
+package tests;
 
 public class ZeroVector implements Vector{
     public static final ZeroVector INSTANCE = new ZeroVector();

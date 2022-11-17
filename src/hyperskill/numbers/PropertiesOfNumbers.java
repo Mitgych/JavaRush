@@ -1,5 +1,5 @@
 
-package numbers;
+package hyperskill.numbers;
 
 enum PropertiesOfNumbers {
     BUZZ,

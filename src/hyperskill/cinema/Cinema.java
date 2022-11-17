@@ -1,4 +1,4 @@
-package cinema;
+package hyperskill.cinema;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class Cinema {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                //Read sizes of cinema
+                //Read sizes of hyperskill.cinema
                 System.out.println("Enter the number of rows:");
                 y = scanner.nextInt();
                 System.out.println("Enter the number of seats in each row:");
@@ -106,7 +106,7 @@ public class Cinema {
     }
 
 
-    //write picture of cinema
+    //write picture of hyperskill.cinema
     public static void printCinemaHall() {
         System.out.println("\nCinema:\n");
         System.out.print("  ");

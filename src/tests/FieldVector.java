@@ -1,4 +1,4 @@
-package testInterface;
+package tests;
 
 public class FieldVector implements Vector{
     double x, y, z;
